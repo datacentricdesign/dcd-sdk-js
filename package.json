@@ -1,6 +1,6 @@
 {
   "name": "dcd-sdk-js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Javascript SDK for the Data-Centric Design Hub",
   "main": "index.js",
   "private": false,
