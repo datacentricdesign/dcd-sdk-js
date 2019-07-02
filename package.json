@@ -1,8 +1,8 @@
 {
   "name": "dcd-sdk-js",
-  "version": "0.0.14",
+  "version": "0.0.16",
   "description": "A Javascript SDK for the Data-Centric Design Hub",
-  "main": "index.js",
+  "main": "dist/index.js",
   "private": false,
   "scripts": {
     "prepare": "tsc && cp package.json dist/ && cp README.md dist/ && cp LICENSE dist/",
@@ -26,7 +26,6 @@
     "install": "^0.12.2",
     "node-fetch": "^2.6.0",
     "npm": "^6.9.0",
-    "passport-oauth2": "^1.5.0",
     "typescript": "^3.5.1"
   }
 }

@@ -6,4 +6,4 @@ export { Thing } from './entities/thing'
 
 export {GETRequest, POSTRequest, PUTRequest} from './helpers/http'
 
-export {PassportStrategy} from './passport-strategy'
+export const Strategy = require('./passport-dcd/strategy');
