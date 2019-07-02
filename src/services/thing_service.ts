@@ -20,6 +20,14 @@ export class ThingService {
             return http.GETRequest(api_url+'/things/'+thing_id+'/properties/'+property_id,thing_token)
         }   
     }
+
+    static async deleteThing(thing_id:string,thing_token:string):Promise<any>{
+        return http.DELETERequest(api_url+'/things/'+thing_id,thing_token)
+    }
+
+    static async deleteProperty(thing_id:string,property_id,thing_token):Promise<any>{
+        return http.DELETERequest(api_url+'/things/'+thing_id+'/properties/'+property_id,thing_token)
+    }
     
     
 
