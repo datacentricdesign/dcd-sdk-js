@@ -1,9 +1,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "allowJs": true,
     "outDir": "./dist",
     "sourceMap": true,
-    "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
