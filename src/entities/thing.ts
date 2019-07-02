@@ -1,6 +1,7 @@
 import { Property } from './property'
 import { PropertyType } from './property'
 import  * as http from '../helpers/http'
+import {ThingService} from '../services/thing_service'
 
 const api_url = 'https://dwd.tudelft.nl/api'
 
@@ -46,7 +47,7 @@ export class Thing {
     }
 
     async read(): Promise<void>{
-        const result = await http.GETRequest(api_url+'/things/'+this.thing_id,this.thing_token)
+        const result = await ThingService.read(this.thing_id,this.thing_token)
         if(result.thing === undefined){
             throw new TypeError('body is undifined : no thing found, check if the id and token of your thing are valid')
         }else{
