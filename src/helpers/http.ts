@@ -137,4 +137,3 @@ export const DELETERequest = (url:string,authorization:string) => {
         .catch(err => { throw err });
         //.catch(err => console.log(err));
   };
-

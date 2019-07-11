@@ -1,4 +1,3 @@
-//import {  Thing  } from '../entities/thing'
 import {  Thing  } from '../entities/thing'
 import { Property, PropertyType } from '../entities/property'
 import * as dotenv from 'dotenv'
@@ -19,7 +18,7 @@ var my_thing = new Thing({
 
 my_thing.read().then(async () => {
     console.log('my_thing',my_thing.json())
-    const my_property = await my_thing.find_or_create_property("My Random Property",PropertyType.THREE_DIMENSIONS)
+    const my_property = await my_thing.find_or_create_property("yeah",PropertyType.THREE_DIMENSIONS)
     console.log('my_property',my_property.json())
     setInterval(function(){
     generate_dum_property_values(my_property)

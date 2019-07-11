@@ -36,7 +36,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 exports.__esModule = true;
-//import {  Thing  } from '../entities/thing'
 var thing_1 = require("../entities/thing");
 var property_1 = require("../entities/property");
 var dotenv = require("dotenv");
@@ -56,7 +55,7 @@ my_thing.read().then(function () { return __awaiter(_this, void 0, void 0, funct
         switch (_a.label) {
             case 0:
                 console.log('my_thing', my_thing.json());
-                return [4 /*yield*/, my_thing.find_or_create_property("My Random Property", property_1.PropertyType.THREE_DIMENSIONS)];
+                return [4 /*yield*/, my_thing.find_or_create_property("yeah", property_1.PropertyType.THREE_DIMENSIONS)];
             case 1:
                 my_property = _a.sent();
                 console.log('my_property', my_property.json());

@@ -36,21 +36,77 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var http = require("../helpers/http");
-var api_url = 'https://dwd.tudelft.nl/api';
+var api_url = 'https://dwd.tudelft.nl:443/api';
 var ThingService = /** @class */ (function () {
     function ThingService() {
     }
+    ThingService.readAll = function (thing_token) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, http.GETRequest(api_url + '/things', thing_token)];
+            });
+        });
+    };
     ThingService.read = function (thing_id, thing_token) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                /*const result = await http.GETRequest(api_url+'/things/'+thing_id,thing_token)
-                if(result.thing === undefined){
-                    throw new TypeError('body is undifined : no thing found, check if the id and token of your thing are valid')
-                }else{
-                    return result
-                }
-            }*/
                 return [2 /*return*/, http.GETRequest(api_url + '/things/' + thing_id, thing_token)];
+            });
+        });
+    };
+    ThingService.readProperty = function (thing_id, property_id, from, to, thing_token) {
+        return __awaiter(this, void 0, void 0, function () {
+            var readPropertyAPI;
+            return __generator(this, function (_a) {
+                if (from !== undefined && to !== undefined) {
+                    readPropertyAPI = api_url + '/things/' + thing_id + '/properties/' + property_id + '?from=' + from + '&to=' + to;
+                    return [2 /*return*/, http.GETRequest(readPropertyAPI, thing_token)];
+                }
+                else {
+                    return [2 /*return*/, http.GETRequest(api_url + '/things/' + thing_id + '/properties/' + property_id, thing_token)];
+                }
+                return [2 /*return*/];
+            });
+        });
+    };
+    ThingService.deleteThing = function (thing_id, thing_token) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, http.DELETERequest(api_url + '/things/' + thing_id, thing_token)];
+            });
+        });
+    };
+    ThingService.deleteProperty = function (thing_id, property_id, thing_token) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, http.DELETERequest(api_url + '/things/' + thing_id + '/properties/' + property_id, thing_token)];
+            });
+        });
+    };
+    ThingService.createThing = function (thing_json, jwt, thing_token) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                if (jwt !== undefined) {
+                    return [2 /*return*/, http.POSTRequest(api_url + '/things/?jwt=' + jwt, thing_token, thing_json)];
+                }
+                else {
+                    return [2 /*return*/, http.POSTRequest(api_url + '/things/', thing_token, thing_json)];
+                }
+                return [2 /*return*/];
+            });
+        });
+    };
+    ThingService.createProperty = function (thing_id, property_json, thing_token) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, http.POSTRequest(api_url + '/things/' + thing_id + '/properties', thing_token, property_json)];
+            });
+        });
+    };
+    ThingService.updateProperty = function (thing_id, property_id, values, thing_token) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, http.POSTRequest(api_url + '/things/' + thing_id + '/properties/' + property_id + '/values/' + values.join() + '/file', thing_token, {})];
             });
         });
     };

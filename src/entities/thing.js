@@ -36,9 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var property_1 = require("./property");
-var http = require("../helpers/http");
 var thing_service_1 = require("../services/thing_service");
-var api_url = 'https://dwd.tudelft.nl/api';
 var Thing = /** @class */ (function () {
     function Thing(params) {
         var _this = this;
@@ -132,7 +130,7 @@ var Thing = /** @class */ (function () {
                             property_name: property_name,
                             property_type: property_type
                         });
-                        return [4 /*yield*/, http.POSTRequest(api_url + '/things/' + this.thing_id + '/properties', this.thing_token, prop.json())];
+                        return [4 /*yield*/, thing_service_1.ThingService.createProperty(this.thing_id, prop.json(), this.thing_token)];
                     case 1:
                         result = _a.sent();
                         prop_res = new property_1.Property({
@@ -189,14 +187,23 @@ var Thing = /** @class */ (function () {
         if (!this.contains(property.property_id)) {
             this.thing_properties.push(property);
         }
-        else {
-            console.log(property.property_id, 'already there');
-        }
     };
     Thing.prototype.update_property_http = function (property) {
         return __awaiter(this, void 0, void 0, function () {
+            var last_values, result;
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        last_values = property.property_values[0];
+                        return [4 /*yield*/, thing_service_1.ThingService.updateProperty(this.thing_id, property.property_id, last_values, this.thing_token)
+                            //console.log('update property',result)
+                        ];
+                    case 1:
+                        result = _a.sent();
+                        //console.log('update property',result)
+                        console.log('update property', last_values, result);
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -224,7 +231,6 @@ var Thing = /** @class */ (function () {
         }
     };
     Thing.prototype.find_property_by_name = function (property_name) {
-        var res;
         for (var i = 0; i <= this.thing_properties.length; i++) {
             if (i < this.thing_properties.length) {
                 if (property_name == this.thing_properties[i].property_name) {
@@ -233,7 +239,7 @@ var Thing = /** @class */ (function () {
                 }
             }
             else {
-                return res;
+                return undefined;
             }
         }
     };

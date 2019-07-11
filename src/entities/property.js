@@ -23,7 +23,10 @@ var Property = /** @class */ (function () {
         };
     };
     Property.prototype.update_values = function (values) {
-        this.property_values = values;
+        this.property_values = [];
+        var ts = (new Date()).getTime();
+        values.unshift(ts);
+        this.property_values.push(values);
         this.proprety_entity.update_property(this);
     };
     return Property;
@@ -31,18 +34,6 @@ var Property = /** @class */ (function () {
 exports.Property = Property;
 var PropertyType;
 (function (PropertyType) {
-    /*ONE_DIMENSION = "1D",
-    TWO_DIMENSIONS = "2D",
-    THREE_DIMENSIONS = "3D",
-    FOUR_DIMENSIONS = "4D",
-    FIVE_DIMENSIONS = "5D",
-    SIX_DIMENSIONS = "6D",
-    SEVEN_DIMENSIONS = "7D",
-    EIGHT_DIMENSIONS = "8D",
-    NINE_DIMENSIONS = "9D",
-    TEN_DIMENSIONS = "10D",
-    ELEVEN_DIMENSIONS = "11D",
-    TWELVE_DIMENSIONS = "12D",*/
     PropertyType["ONE_DIMENSION"] = "ONE_DIMENSION";
     PropertyType["TWO_DIMENSIONS"] = "TWO_DIMENSIONS";
     PropertyType["THREE_DIMENSIONS"] = "THREE_DIMENSIONS";

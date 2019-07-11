@@ -32,26 +32,17 @@ export class Property {
     }
 
     update_values(values:any[]){
-        this.property_values = values
+        this.property_values = []
+        const ts = (new Date()).getTime()
+        values.unshift(ts)
+        this.property_values.push(values)
         this.proprety_entity.update_property(this)
     }
 
 }
 
 export enum PropertyType{
-    ONE_DIMENSION = "1D",
-    TWO_DIMENSIONS = "2D",
-    THREE_DIMENSIONS = "3D",
-    FOUR_DIMENSIONS = "4D",
-    FIVE_DIMENSIONS = "5D",
-    SIX_DIMENSIONS = "6D",
-    SEVEN_DIMENSIONS = "7D",
-    EIGHT_DIMENSIONS = "8D",
-    NINE_DIMENSIONS = "9D",
-    TEN_DIMENSIONS = "10D",
-    ELEVEN_DIMENSIONS = "11D",
-    TWELVE_DIMENSIONS = "12D",
-    /*ONE_DIMENSION = "ONE_DIMENSION",
+    ONE_DIMENSION = "ONE_DIMENSION",
     TWO_DIMENSIONS = "TWO_DIMENSIONS",
     THREE_DIMENSIONS = "THREE_DIMENSIONS",
     FOUR_DIMENSIONS = "FOUR_DIMENSIONS",
@@ -62,7 +53,7 @@ export enum PropertyType{
     NINE_DIMENSIONS = "NINE_DIMENSIONS",
     TEN_DIMENSIONS = "TEN_DIMENSIONS",
     ELEVEN_DIMENSIONS = "ELEVEN_DIMENSIONS",
-    TWELVE_DIMENSIONS = "TWELVE_DIMENSIONS",*/
+    TWELVE_DIMENSIONS = "TWELVE_DIMENSIONS",
     ACCELEROMETER = "ACCELEROMETER",
     GYROSCOPE = "GYROSCOPE",
     BINARY = "BINARY",

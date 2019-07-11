@@ -1,9 +1,6 @@
 import { Property } from './property'
 import { PropertyType } from './property'
-import  * as http from '../helpers/http'
 import {ThingService} from '../services/thing_service'
-
-const api_url = 'https://dwd.tudelft.nl/api'
 
 export class Thing {
      thing_id: string;
@@ -83,7 +80,7 @@ export class Thing {
             property_name : property_name,
             property_type : property_type,
         })
-        const result = await http.POSTRequest(api_url+'/things/'+this.thing_id+'/properties',this.thing_token,prop.json())
+        const result = await ThingService.createProperty(this.thing_id,prop.json(),this.thing_token)
         const prop_res : Property = new Property({
             property_entity : this,
             property_id :   result.property.id,
@@ -135,16 +132,14 @@ export class Thing {
         this.update_property_http(property)
         if(!this.contains(property.property_id)){
             this.thing_properties.push(property)
-        }else{
-            console.log(property.property_id,'already there')
         }
     }
 
     private async update_property_http(property:Property){
-        //TODO how ?
-        //const result = await http.PUTRequest(api_url+'/things/'+this.thing_id,this.thing_token,this.json()) // doesn't works for properties values
-        //const result = await http.PUTRequest(api_url+'/things/'+this.thing_id+'/properties/'+property.property_id,this.thing_token,property.json()) //{ error: 500, message: 'Server Error' }
-        //console.log('update_http_result',result)
+        const last_values = property.property_values[0]
+        const result = await ThingService.updateProperty(this.thing_id,property.property_id,last_values,this.thing_token)
+        //console.log('update property',result)
+        console.log('update property',last_values,result)
     }
 
     private update_properties(properties:Array<Property>){
@@ -170,7 +165,6 @@ export class Thing {
     }
 
     private find_property_by_name(property_name:string): Property{
-        var res : Property;
         for (var i = 0; i <= this.thing_properties.length; i ++) {
             if(i < this.thing_properties.length){
                 if(property_name == this.thing_properties[i].property_name){
@@ -178,7 +172,7 @@ export class Thing {
                     return this.thing_properties[i]
                 }
             }else{
-                return res
+                return undefined
             }
           }
     }

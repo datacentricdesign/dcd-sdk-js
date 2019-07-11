@@ -103,3 +103,36 @@ exports.PUTRequest = function (url, authorization, body) {
     })["catch"](function (err) { throw err; });
     //.catch(err => console.log(err));
 };
+/**
+ * A small helper function to make a DELETE request to the backend.
+ * It includes a bearer token in the request header.
+ * @param url
+ * @param authorization
+ * @param body
+ * @returns {Promise<>}
+ */
+exports.DELETERequest = function (url, authorization) {
+    var params = {
+        headers: {
+            Authorization: 'bearer ' + authorization,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        method: 'DELETE'
+    };
+    return fetch(url, params)
+        .then(function (res) {
+        if (res.ok) {
+            try {
+                return Promise.resolve(res.json());
+            }
+            catch (e) {
+                return Promise.resolve(res.text());
+            }
+        }
+        else {
+            return Promise.resolve(res.text());
+        }
+    })["catch"](function (err) { throw err; });
+    //.catch(err => console.log(err));
+};
