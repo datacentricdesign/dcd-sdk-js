@@ -133,7 +133,7 @@ Similar to the Thing, we can display the details of a Property with the method j
 ```js
 async function create_property() {
     const my_property = await my_thing.find_or_create_property("My Random Property",
-PropertyType.THREE_DIMENSIONS)
+dcd.PropertyType.THREE_DIMENSIONS)
     console.log(my_property.json())
 }
 create_property()
@@ -360,7 +360,7 @@ const strategyOptions = {
     scope: ['offline', 'openid', 'profile', 'dcd:things', 'dcd:persons']
   };
 
-  passport.use('oauth2', new Strategy(strategyOptions,
+  passport.use('oauth2', new dcd.Strategy(strategyOptions,
     (accessToken, refreshToken, profile, cb) => cb(null, {accessToken, profile})
   ));
   passport.use('refresh', refresh);
