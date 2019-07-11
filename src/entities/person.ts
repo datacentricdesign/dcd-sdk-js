@@ -20,7 +20,7 @@ export class Person {
         //this.json_person = json_person
     }
     
-    to_json():{}{
+    json():{}{
         return{
             id:this.person_id,
             name:this.person_name,
