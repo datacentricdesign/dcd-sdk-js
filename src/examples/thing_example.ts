@@ -12,8 +12,8 @@ const THING_TOKEN = process.env.THING_TOKEN;
 //var my_thing = new Thing(THING_ID,THING_TOKEN,undefined,undefined,undefined,undefined)
 
 var my_thing = new Thing({
-    thing_id : THING_ID,
-    thing_token : THING_TOKEN,
+    id : THING_ID,
+    token : THING_TOKEN,
 })
 
 my_thing.read().then(async () => {

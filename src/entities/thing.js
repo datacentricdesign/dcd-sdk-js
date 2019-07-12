@@ -46,26 +46,26 @@ var Thing = /** @class */ (function () {
             throw new TypeError('Thing : constructor param is undefined');
         }
         else {
-            this.thing_id = params['thing_id'];
-            this.thing_token = params['thing_token'];
-            this.thing_name = params['thing_name'];
-            this.thing_description = params['thing_description'];
-            this.thing_type = params['thing_type'];
-            if (params['thing_properties'] instanceof Array) {
-                params['thing_properties'].forEach(function (property) {
+            this.thing_id = params['id'];
+            this.thing_token = params['token'];
+            this.thing_name = params['name'];
+            this.thing_description = params['description'];
+            this.thing_type = params['type'];
+            if (params['properties'] instanceof Array) {
+                params['properties'].forEach(function (property) {
                     if (property instanceof property_1.Property) {
                         _this.thing_properties.push(property);
                     }
                     else {
                         if (property.constructor === {}.constructor) {
                             _this.thing_properties.push(new property_1.Property({
-                                property_entity: _this,
-                                property_id: property['id'],
-                                property_name: property['name'],
-                                property_description: property['description'],
-                                property_type: property['type'],
-                                property_dimensions: property['dimensions'],
-                                property_values: property['values']
+                                entity: _this,
+                                id: property['id'],
+                                name: property['name'],
+                                description: property['description'],
+                                type: property['type'],
+                                dimensions: property['dimensions'],
+                                values: property['values']
                             }));
                         }
                     }
@@ -135,13 +135,13 @@ var Thing = /** @class */ (function () {
                     case 1:
                         result = _a.sent();
                         prop_res = new property_1.Property({
-                            property_entity: this,
-                            property_id: result.property.id,
-                            property_name: result.property.name,
-                            property_description: result.property.description,
-                            property_type: result.property.type,
-                            property_dimensions: result.property.dimensions,
-                            property_values: result.property.values
+                            entity: this,
+                            id: result.property.id,
+                            name: result.property.name,
+                            description: result.property.description,
+                            type: result.property.type,
+                            dimensions: result.property.dimensions,
+                            values: result.property.values
                         });
                         this.thing_properties.push(prop_res);
                         return [2 /*return*/, prop_res];
@@ -168,13 +168,13 @@ var Thing = /** @class */ (function () {
                 var property = array[i];
                 if (property.constructor === {}.constructor) {
                     res.push(new property_1.Property({
-                        property_entity: this,
-                        property_id: property.id,
-                        property_name: property.name,
-                        property_description: property.description,
-                        property_type: property.type,
-                        property_dimensions: property.dimensions,
-                        property_values: property.values
+                        entity: this,
+                        id: property.id,
+                        name: property.name,
+                        description: property.description,
+                        type: property.type,
+                        dimensions: property.dimensions,
+                        values: property.values
                     }));
                 }
             }
@@ -197,11 +197,11 @@ var Thing = /** @class */ (function () {
                     case 0:
                         last_values = property.property_values[0];
                         return [4 /*yield*/, property_service_1.PropertyService.update(this.thing_id, property.property_id, property.json(), this.thing_token)
-                            //console.log('update property',result)
+                            //const result = await PropertyService.updatefile(this.thing_id,property.property_id,last_values,this.thing_token)
                         ];
                     case 1:
                         result = _a.sent();
-                        //console.log('update property',result)
+                        //const result = await PropertyService.updatefile(this.thing_id,property.property_id,last_values,this.thing_token)
                         console.log('update property', last_values, result);
                         return [2 /*return*/];
                 }

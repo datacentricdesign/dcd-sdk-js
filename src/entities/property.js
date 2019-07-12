@@ -4,13 +4,13 @@ var Property = /** @class */ (function () {
     function Property(params) {
         this.property_dimensions = [];
         this.property_values = [];
-        this.proprety_entity = params['property_entity'];
-        this.property_id = params['property_id'];
-        this.property_name = params['property_name'];
-        this.property_description = params['property_description'];
-        this.property_type = params['property_type'];
-        this.property_dimensions = params['property_dimensions'];
-        this.property_values = params['property_values'];
+        this.proprety_entity = params['entity'];
+        this.property_id = params['id'];
+        this.property_name = params['name'];
+        this.property_description = params['description'];
+        this.property_type = params['type'];
+        this.property_dimensions = params['dimensions'];
+        this.property_values = params['values'];
     }
     Property.prototype.json = function () {
         return {

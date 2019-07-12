@@ -15,26 +15,26 @@ export class Thing {
         if(params === undefined){
             throw new TypeError('Thing : constructor param is undefined')
         }else{
-        this.thing_id = params['thing_id']
-        this.thing_token = params['thing_token']
-        this.thing_name = params['thing_name']
-        this.thing_description = params['thing_description']
-        this.thing_type = params['thing_type']
+        this.thing_id = params['id']
+        this.thing_token = params['token']
+        this.thing_name = params['name']
+        this.thing_description = params['description']
+        this.thing_type = params['type']
         
-        if(params['thing_properties'] instanceof Array){
-            params['thing_properties'].forEach(property => {
+        if(params['properties'] instanceof Array){
+            params['properties'].forEach(property => {
                 if(property instanceof Property){
                     this.thing_properties.push(property)
                 }else{
                     if(property.constructor === {}.constructor){
                         this.thing_properties.push(new Property({
-                            property_entity : this, 
-                            property_id : property['id'],
-                            property_name : property['name'],
-                            property_description : property['description'],
-                            property_type : property['type'],
-                            property_dimensions : property['dimensions'],
-                            property_values : property['values']
+                            entity : this, 
+                            id : property['id'],
+                            name : property['name'],
+                            description : property['description'],
+                            type : property['type'],
+                            dimensions : property['dimensions'],
+                            values : property['values']
                         }
                         ))
                     }
@@ -83,13 +83,13 @@ export class Thing {
         })
         const result = await PropertyService.create(this.thing_id,prop.json(),this.thing_token)
         const prop_res : Property = new Property({
-            property_entity : this,
-            property_id :   result.property.id,
-            property_name : result.property.name,
-            property_description : result.property.description,
-            property_type : result.property.type,
-            property_dimensions : result.property.dimensions,
-            property_values : result.property.values
+            entity : this,
+            id :   result.property.id,
+            name : result.property.name,
+            description : result.property.description,
+            type : result.property.type,
+            dimensions : result.property.dimensions,
+            values : result.property.values
         })
         this.thing_properties.push(prop_res)
         return prop_res
@@ -114,13 +114,13 @@ export class Thing {
                 const property = array[i]
                 if(property.constructor === {}.constructor){
                 res.push(new Property({
-                    property_entity : this,
-                    property_id :   property.id,
-                    property_name : property.name,
-                    property_description : property.description,
-                    property_type : property.type,
-                    property_dimensions : property.dimensions,
-                    property_values : property.values
+                    entity : this,
+                    id :   property.id,
+                    name : property.name,
+                    description : property.description,
+                    type : property.type,
+                    dimensions : property.dimensions,
+                    values : property.values
                 }))
                 }
            }else{

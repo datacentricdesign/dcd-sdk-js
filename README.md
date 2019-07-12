@@ -80,12 +80,10 @@ Next, we can instantiate a Thing with the credentials, with a JSON Object. We st
 ```js
 //Instantiate a thing with its credential
 var my_thing = new dcd.Thing({
-    thing_id : THING_ID,
-    thing_token : THING_TOKEN,
+    id : THING_ID,
+    token : THING_TOKEN,
 })
 ```
-
-Notes that all the entities parameters starts with her name, here we have *thing_id* for the things id, for persons it would be *person_id* and *property_id* for properties.
 
 The following line ‘read’ the details of our Thing, meaning it connects the DCD Hub and asks for the information related to this Thing.
 
@@ -249,9 +247,9 @@ console.log(data)
 //You can set if you want a jwt in response
 //Your have to create a Thing with a name
 const thing = new dcd.Thing({
-    thing_name : 'your_thing_name',
-    thing_type : 'your_thing_type'
-    thing_description : 'your_thing_description',
+    name : 'your_thing_name',
+    type : 'your_thing_type'
+    description : 'your_thing_description',
     //...
 })
 const jwt = true
@@ -286,9 +284,9 @@ console.log(data)
 //You have to create a property with a name and a type of PropertyType
 const thing_id = 'your_thing_id'
 const property = new dcd.Property({
-    property_name : 'your_property_name',
-    property_type : dcd.PropertyType.LOCATION
-    property_description : 'your_property_description',
+    name : 'your_property_name',
+    type : dcd.PropertyType.LOCATION
+    description : 'your_property_description',
     //...
 })
 dcd.PropertyService.create(thing_id,property.json(),token)
