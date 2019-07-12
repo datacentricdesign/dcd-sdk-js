@@ -1,6 +1,7 @@
 import { Property } from './property'
 import { PropertyType } from './property'
 import {ThingService} from '../services/thing_service'
+import {PropertyService} from '../services/property_service'
 
 export class Thing {
      thing_id: string;
@@ -80,7 +81,7 @@ export class Thing {
             property_name : property_name,
             property_type : property_type,
         })
-        const result = await ThingService.createProperty(this.thing_id,prop.json(),this.thing_token)
+        const result = await PropertyService.create(this.thing_id,prop.json(),this.thing_token)
         const prop_res : Property = new Property({
             property_entity : this,
             property_id :   result.property.id,
@@ -137,8 +138,8 @@ export class Thing {
 
     private async update_property_http(property:Property){
         const last_values = property.property_values[0]
-        const result = await ThingService.updateProperty(this.thing_id,property.property_id,last_values,this.thing_token)
-        //console.log('update property',result)
+        const result = await PropertyService.update(this.thing_id,property.property_id,property.json(),this.thing_token)
+        //const result = await PropertyService.updatefile(this.thing_id,property.property_id,last_values,this.thing_token)
         console.log('update property',last_values,result)
     }
 

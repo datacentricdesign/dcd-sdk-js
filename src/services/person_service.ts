@@ -30,7 +30,7 @@ export class PersonService {
      * @returns {Promise<any>} 
      */
     static async logout(person_sub,person_token):Promise<any>{
-        return http.DELETERequest(auth_url+'/sessions/login?subject='+person_sub,person_token)
+        return http.DELETERequest(encodeURI(auth_url+'/sessions/login?subject='+person_sub),person_token)
     }
     /*
     static async revokeConsent(person_sub,person_token):Promise<any>{

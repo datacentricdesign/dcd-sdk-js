@@ -225,40 +225,22 @@ console.log(data)
  const dcd = require('dcd-sdk-js')
  const token = 'your_token'
 
-//Read all things
-dcd.ThingService.readAll(token)
+//list all things
+dcd.ThingService.list(token)
 .then((data)=> {
 console.log(data)
 })
 
-//Read all things
+//Read a things by id
 const thing_id = 'your_thing_id'
 dcd.ThingService.read(thing_id,token)
 .then((data)=> {
 console.log(data)
 })
 
-//Read a property with his id
-const thing_id = 'your_thing_id'
-const property_id = 'your_property_id'
-const from = (new Date('December 17, 2008 03:24:00')).getTime()
-const to = (new Date()).getTime()
-dcd.ThingService.readProperty(thing_id,property_id,from,to,token)
-.then((data)=> {
-console.log(data)
-})
-
 //Delete thing with his id
 const thing_id = 'your_thing_id'
-dcd.ThingService.deleteThing(thing_id,token)
-.then((data)=> {
-console.log(data)
-})
-
-//Delete property with his id
-const thing_id = 'your_thing_id'
-const property_id = 'your_property_id'
-dcd.ThingService.deleteProperty(thing_id,property_id,token)
+dcd.ThingService.delete(thing_id,token)
 .then((data)=> {
 console.log(data)
 })
@@ -273,7 +255,29 @@ const thing = new dcd.Thing({
     //...
 })
 const jwt = true
-dcd.ThingService.createThing(thing.json(),jwt,token)
+dcd.ThingService.create(thing.json(),jwt,token)
+.then((data)=> {
+console.log(data)
+})
+```
+
+### Property Service
+
+```js
+//Read a property with his id
+const thing_id = 'your_thing_id'
+const property_id = 'your_property_id'
+const from = (new Date('December 17, 2008 03:24:00')).getTime()
+const to = (new Date()).getTime()
+dcd.PropertyService.read(thing_id,property_id,from,to,token)
+.then((data)=> {
+console.log(data)
+})
+
+//Delete property with his id
+const thing_id = 'your_thing_id'
+const property_id = 'your_property_id'
+dcd.PropertyService.delete(thing_id,property_id,token)
 .then((data)=> {
 console.log(data)
 })
@@ -287,7 +291,7 @@ const property = new dcd.Property({
     property_description : 'your_property_description',
     //...
 })
-dcd.ThingService.createProperty(thing_id,property.json(),token)
+dcd.PropertyService.create(thing_id,property.json(),token)
 .then((data)=> {
 console.log(data)
 })
@@ -297,7 +301,7 @@ const thing_id = 'your_thing_id'
 const property_id = 'your_property_id'
 const ts_now = (new Date()).getTime()
 const values = [ts_now,52.0186,4.3782] //example of location values
-dcd.ThingService.updateProperty(thing_id,property_id,values,token)
+dcd.PropertyService.update(thing_id,property_id,values,token)
 .then((data)=> {
 console.log(data)
 })

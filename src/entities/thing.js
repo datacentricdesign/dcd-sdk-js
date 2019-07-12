@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 var property_1 = require("./property");
 var thing_service_1 = require("../services/thing_service");
+var property_service_1 = require("../services/property_service");
 var Thing = /** @class */ (function () {
     function Thing(params) {
         var _this = this;
@@ -130,7 +131,7 @@ var Thing = /** @class */ (function () {
                             property_name: property_name,
                             property_type: property_type
                         });
-                        return [4 /*yield*/, thing_service_1.ThingService.createProperty(this.thing_id, prop.json(), this.thing_token)];
+                        return [4 /*yield*/, property_service_1.PropertyService.create(this.thing_id, prop.json(), this.thing_token)];
                     case 1:
                         result = _a.sent();
                         prop_res = new property_1.Property({
@@ -195,7 +196,7 @@ var Thing = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         last_values = property.property_values[0];
-                        return [4 /*yield*/, thing_service_1.ThingService.updateProperty(this.thing_id, property.property_id, last_values, this.thing_token)
+                        return [4 /*yield*/, property_service_1.PropertyService.update(this.thing_id, property.property_id, property.json(), this.thing_token)
                             //console.log('update property',result)
                         ];
                     case 1:

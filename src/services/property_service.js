@@ -37,73 +37,92 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 var http = require("../helpers/http");
 var api_url = 'https://dwd.tudelft.nl:443/api';
-var ThingService = /** @class */ (function () {
-    function ThingService() {
+var PropertyService = /** @class */ (function () {
+    function PropertyService() {
     }
     /**
-     * function read all things.
-     * @param thing_token
-     * @returns {Promise<any>}
-     */
-    ThingService.list = function (thing_token) {
+         * function read a property with his id.
+         * read also the value from a date to another (timestamp)
+         * @param thing_id
+         * @param property_id
+         * @param from
+         * @param to
+         * @param thing_token
+         * @returns {Promise<any>}
+         */
+    PropertyService.read = function (thing_id, property_id, from, to, thing_token) {
         return __awaiter(this, void 0, void 0, function () {
+            var readPropertyAPI;
             return __generator(this, function (_a) {
-                return [2 /*return*/, http.GETRequest(api_url + '/things', thing_token)];
-            });
-        });
-    };
-    /**
-     * function read a thing with his id.
-     * @param thing_id
-     * @param thing_token
-     * @returns {Promise<any>}
-     */
-    ThingService.read = function (thing_id, thing_token) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, http.GETRequest(api_url + '/things/' + thing_id, thing_token)];
-            });
-        });
-    };
-    /**
-     * function delete a thing with his id.
-     * @param thing_id
-     * @param thing_token
-     * @returns {Promise<any>}
-     */
-    ThingService["delete"] = function (thing_id, thing_token) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, http.DELETERequest(api_url + '/things/' + thing_id, thing_token)];
-            });
-        });
-    };
-    /**
-     * function create a thing with a thing in json.
-     * you can set if you want a jwt in response
-     * @param thing_json
-     * @param jwt
-     * @param thing_token
-     * @returns {Promise<any>}
-     */
-    ThingService.create = function (thing_json, jwt, thing_token) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                /*if(jwt!== undefined){
-                    return http.POSTRequest(api_url+'/things/?jwt='+jwt,thing_token,thing_json)
-                }else{
-                    return http.POSTRequest(api_url+'/things/',thing_token,thing_json)
-                }*/
-                if (jwt !== undefined) {
-                    return [2 /*return*/, http.POSTRequestWithTimeOut(api_url + '/things/?jwt=' + jwt, thing_token, thing_json, 60000)];
+                if (from !== undefined && to !== undefined) {
+                    readPropertyAPI = api_url + '/things/' + thing_id + '/properties/' + property_id + '?from=' + from + '&to=' + to;
+                    return [2 /*return*/, http.GETRequest(readPropertyAPI, thing_token)];
                 }
                 else {
-                    return [2 /*return*/, http.POSTRequestWithTimeOut(api_url + '/things/', thing_token, thing_json, 60000)];
+                    return [2 /*return*/, http.GETRequest(api_url + '/things/' + thing_id + '/properties/' + property_id, thing_token)];
                 }
                 return [2 /*return*/];
             });
         });
     };
-    return ThingService;
+    /**
+     * function delete a property with his id.
+     * @param thing_id
+     * @param property_id
+     * @param thing_token
+     * @returns {Promise<any>}
+     */
+    PropertyService["delete"] = function (thing_id, property_id, thing_token) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, http.DELETERequest(api_url + '/things/' + thing_id + '/properties/' + property_id, thing_token)];
+            });
+        });
+    };
+    /**
+     * function create a property with a property in json.
+     * @param thing_id
+     * @param property_json
+     * @param thing_token
+     * @returns {Promise<any>}
+     */
+    PropertyService.create = function (thing_id, property_json, thing_token) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, http.POSTRequest(api_url + '/things/' + thing_id + '/properties', thing_token, property_json)];
+            });
+        });
+    };
+    /**
+         * function update a property with an array of values.
+         * @param thing_id
+         * @param property_id
+         * @param values
+         * @param thing_token
+         * @returns {Promise<any>}
+         */
+    PropertyService.update = function (thing_id, property_id, property_json, thing_token) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, http.PUTRequest(api_url + '/things/' + thing_id + '/properties/' + property_id, thing_token, property_json)];
+            });
+        });
+    };
+    /**
+         * function update a property with an array of values and a file.
+         * @param thing_id
+         * @param property_id
+         * @param values
+         * @param thing_token
+         * @returns {Promise<any>}
+         */
+    PropertyService.updatefile = function (thing_id, property_id, values, thing_token) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, http.POSTRequest(api_url + '/things/' + thing_id + '/properties/' + property_id + '/values/' + values.join() + '/file', thing_token, {})];
+            });
+        });
+    };
+    return PropertyService;
 }());
-exports.ThingService = ThingService;
+exports.PropertyService = PropertyService;
