@@ -34,7 +34,8 @@ export class Thing {
                             description : property['description'],
                             type : property['type'],
                             dimensions : property['dimensions'],
-                            values : property['values']
+                            values : property['values'],
+                            entityId : property['entityId']
                         }
                         ))
                     }
@@ -78,10 +79,11 @@ export class Thing {
 
     private async create_property(property_name:string,property_type:PropertyType):Promise<Property>{
         var prop = new Property({
-            property_name : property_name,
-            property_type : property_type,
+            name : property_name,
+            type : property_type,
         })
         const result = await PropertyService.create(this.thing_id,prop.json(),this.thing_token)
+        console.log('result',result)
         const prop_res : Property = new Property({
             entity : this,
             id :   result.property.id,

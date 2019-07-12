@@ -55,7 +55,7 @@ my_thing.read().then(function () { return __awaiter(_this, void 0, void 0, funct
         switch (_a.label) {
             case 0:
                 console.log('my_thing', my_thing.json());
-                return [4 /*yield*/, my_thing.find_or_create_property("yeah", property_1.PropertyType.THREE_DIMENSIONS)];
+                return [4 /*yield*/, my_thing.find_or_create_property("ope", property_1.PropertyType.THREE_DIMENSIONS)];
             case 1:
                 my_property = _a.sent();
                 console.log('my_property', my_property.json());

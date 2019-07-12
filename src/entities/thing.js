@@ -65,7 +65,8 @@ var Thing = /** @class */ (function () {
                                 description: property['description'],
                                 type: property['type'],
                                 dimensions: property['dimensions'],
-                                values: property['values']
+                                values: property['values'],
+                                entityId: property['entityId']
                             }));
                         }
                     }
@@ -128,12 +129,13 @@ var Thing = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         prop = new property_1.Property({
-                            property_name: property_name,
-                            property_type: property_type
+                            name: property_name,
+                            type: property_type
                         });
                         return [4 /*yield*/, property_service_1.PropertyService.create(this.thing_id, prop.json(), this.thing_token)];
                     case 1:
                         result = _a.sent();
+                        console.log('result', result);
                         prop_res = new property_1.Property({
                             entity: this,
                             id: result.property.id,

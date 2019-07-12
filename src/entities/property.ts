@@ -8,6 +8,7 @@ export class Property {
     property_type: string;
     property_dimensions: any[] = [];
     property_values: any[] = [];
+    property_entitiy_id:string;
 
 
     constructor(params : {}) {
@@ -18,6 +19,7 @@ export class Property {
             this.property_type = params['type'];
             this.property_dimensions = params['dimensions'];
             this.property_values = params['values'];
+            this.property_entitiy_id = params ['entityId']
     }
 
     json(){
@@ -27,7 +29,8 @@ export class Property {
             type : this.property_type,
             description: this.property_description,
             dimensions: this.property_dimensions,
-            values : this.property_values
+            values : this.property_values,
+            entityId : this.property_entitiy_id
         }
     }
 
