@@ -11,3 +11,5 @@ export {PersonService} from './services/person_service'
 export {PropertyService} from './services/property_service'
 
 export const Strategy = require('./passport-dcd/strategy');
+
+export {RouterAPI} from './api/index'

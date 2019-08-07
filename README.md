@@ -428,3 +428,11 @@ app.listen(PORT, () => {
   console.log(`Node Express server listening on http://localhost:${PORT}`);
 });
 ```
+
+## RouterAPI
+After initializing your server express the Oauth2 Strategy you can use the [routerAPI](https://github.com/datacentricdesign/dcd-sdk-js/blob/master/src/api/index.ts) with the authentification middleware.
+
+```js
+const dcd = require('dcd-sdk-js')
+app.use(baseUrl+'/api', checkAuthentication, dcd.RouterAPI);
+```
