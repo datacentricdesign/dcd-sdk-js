@@ -45,7 +45,7 @@ export const POSTRequest = (url:string,authorization:string,body:{}) => {
       },
       method: 'POST'
   };
-  if (body !== undefined) {
+  if (body) {
       const bodyStr = JSON.stringify(body);
       params.headers['Content-length'] = bodyStr.length;
       params['body'] = bodyStr;
@@ -84,7 +84,7 @@ export const PUTRequest = (url:string,authorization:string,body:{}) => {
       },
       method: 'PUT'
   };
-  if (body !== undefined) {
+  if (body) {
       const bodyStr = JSON.stringify(body);
       params.headers['Content-length'] = bodyStr.length;
       params['body'] = bodyStr;
@@ -163,7 +163,7 @@ export const POSTRequestWithTimeOut = (url:string,authorization:string,body:{},t
         method: 'POST',
         signal : controller.signal
     };
-    if (body !== undefined) {
+    if (body) {
         const bodyStr = JSON.stringify(body);
         params.headers['Content-length'] = bodyStr.length;
         params['body'] = bodyStr;

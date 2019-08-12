@@ -15,7 +15,7 @@ export class PropertyService {
      * @returns {Promise<any>}
      */
     static async read(thing_id:string,property_id:string,from :number ,to :number,thing_token:string):Promise<any>{
-        if (from !== undefined && to !== undefined) {
+        if (from && to) {
             const readPropertyAPI = api_url+'/things/'+thing_id+'/properties/'+property_id+ '?from=' + from + '&to=' + to;
             return http.GETRequest(readPropertyAPI,thing_token)
         }else {

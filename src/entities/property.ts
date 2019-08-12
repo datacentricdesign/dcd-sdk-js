@@ -12,6 +12,9 @@ export class Property {
 
 
     constructor(params : {}) {
+        if(!params){
+            throw new TypeError('Property : constructor param is undefined or null')
+        }else{
             this.proprety_entity = params['entity']
             this.property_id = params['id']
             this.property_name = params['name']
@@ -20,6 +23,7 @@ export class Property {
             this.property_dimensions = params['dimensions'];
             this.property_values = params['values'];
             this.property_entitiy_id = params ['entityId']
+        }
     }
 
     json(){

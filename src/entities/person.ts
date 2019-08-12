@@ -1,23 +1,18 @@
 export class Person {
-    //A DCD 'Person' represents a physical person.
     person_id: string;
     person_name: string;
     person_password: string;
-    person_properties: any; // Type properties ? json ?
-    //json_person :{};
+    person_properties: any; // Type properties ? 
 
-    constructor(
-        person_id:string,
-        person_name:string,
-        person_password:string,
-        person_properties:any,
-        //json_person:{}
-        ) {
-        this.person_id = person_id
-        this.person_name = person_name
-        this.person_password = person_password
-        this.person_properties = person_properties
-        //this.json_person = json_person
+    constructor(params : {}) {
+        if(!params){
+            throw new TypeError('Person : constructor param is undefined or null')
+        }else{
+        this.person_id = params['id']
+        this.person_name = params['name']
+        this.person_password = params['password']
+        this.person_properties = params['properties']
+        }
     }
     
     json():{}{

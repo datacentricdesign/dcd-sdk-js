@@ -63,3 +63,8 @@ typings/
 .idea
 .DS_Store
 dist
+
+src/entities/*.js
+src/examples/*.js
+src/helpers/*.js
+src/services/*.js

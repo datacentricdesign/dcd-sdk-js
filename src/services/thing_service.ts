@@ -42,12 +42,7 @@ export class ThingService {
      * @returns {Promise<any>}
      */
     static async create(thing_json:{},jwt:boolean,thing_token:string):Promise<any>{
-        /*if(jwt!== undefined){
-            return http.POSTRequest(api_url+'/things/?jwt='+jwt,thing_token,thing_json)
-        }else{
-            return http.POSTRequest(api_url+'/things/',thing_token,thing_json)
-        }*/
-        if(jwt!== undefined){
+        if(jwt){
             return http.POSTRequestWithTimeOut(api_url+'/things/?jwt='+jwt,thing_token,thing_json,60000)
         }else{
             return http.POSTRequestWithTimeOut(api_url+'/things/',thing_token,thing_json,60000)

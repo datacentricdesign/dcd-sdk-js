@@ -9,8 +9,6 @@ dotenv.config({ path: findconfig('.env') })
 const THING_ID = process.env.THING_ID;
 const THING_TOKEN = process.env.THING_TOKEN;
 
-//var my_thing = new Thing(THING_ID,THING_TOKEN,undefined,undefined,undefined,undefined)
-
 var my_thing = new Thing({
     id : THING_ID,
     token : THING_TOKEN,
@@ -22,7 +20,6 @@ my_thing.read().then(async () => {
     console.log('my_property',my_property.json())
     setInterval(function(){
     generate_dum_property_values(my_property)
-    //console.log('my_thing',my_thing.json())
     },2000)
 })
 

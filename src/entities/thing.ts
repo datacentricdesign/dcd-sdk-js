@@ -1,7 +1,7 @@
 import { Property } from './property'
 import { PropertyType } from './property'
-import {ThingService} from '../services/thing_service'
-import {PropertyService} from '../services/property_service'
+import { ThingService } from '../services/thing_service'
+import { PropertyService } from '../services/property_service'
 
 export class Thing {
      thing_id: string;
@@ -12,8 +12,8 @@ export class Thing {
      thing_properties: Property[] = [];
     
     constructor(params : {}) {
-        if(params === undefined){
-            throw new TypeError('Thing : constructor param is undefined')
+        if(!params){
+            throw new TypeError('Thing : constructor param is undefined or null')
         }else{
         this.thing_id = params['id']
         this.thing_token = params['token']
@@ -47,13 +47,13 @@ export class Thing {
 
     async read(): Promise<void>{
         const result = await ThingService.read(this.thing_id,this.thing_token)
-        if(result.thing === undefined){
-            throw new TypeError('body is undifined : no thing found, check if the id and token of your thing are valid')
+        if(!result.thing){
+            throw new TypeError('body is undifined or null : no thing found, check if the id and token of your thing are valid')
         }else{
             this.thing_name = result.thing['name']
             this.thing_description = result.thing['description']
             this.thing_type =  result.thing['type']
-            this.update_properties(this.array_to_properties(result.thing.properties)) // this has to be update_property : check if a property exist
+            this.update_properties(this.array_to_properties(result.thing.properties))
             return
         }
     }
@@ -83,7 +83,6 @@ export class Thing {
             type : property_type,
         })
         const result = await PropertyService.create(this.thing_id,prop.json(),this.thing_token)
-        console.log('result',result)
         const prop_res : Property = new Property({
             entity : this,
             id :   result.property.id,
@@ -139,10 +138,8 @@ export class Thing {
     }
 
     private async update_property_http(property:Property){
-        const last_values = property.property_values[0]
         const result = await PropertyService.update(this.thing_id,property.property_id,property.json(),this.thing_token)
-        //const result = await PropertyService.updatefile(this.thing_id,property.property_id,last_values,this.thing_token)
-        console.log('update property',last_values,result)
+        console.log('update property',result)
     }
 
     private update_properties(properties:Array<Property>){
@@ -171,7 +168,6 @@ export class Thing {
         for (var i = 0; i <= this.thing_properties.length; i ++) {
             if(i < this.thing_properties.length){
                 if(property_name == this.thing_properties[i].property_name){
-                    //res = this.thing_properties[i]
                     return this.thing_properties[i]
                 }
             }else{

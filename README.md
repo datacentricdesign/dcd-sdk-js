@@ -8,7 +8,7 @@ If you have already install Node JS, you can directly skip to step 2.
 
 ### Step 1 : Install Node JS
 
-Follow the step in the followed link : https://nodejs.org/en/download/
+Follow the step in the followed link : [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 
 ### Step 2 : Init and install the SDK
 
