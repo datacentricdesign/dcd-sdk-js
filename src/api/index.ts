@@ -4,11 +4,12 @@ const router = express.Router();
 import {PersonService} from '../services/person_service'
 import {ThingService} from '../services/thing_service'
 import {PropertyService} from '../services/property_service' 
+import {StatService} from '../services/stat_service'
 
 router.delete('/logout',
     async (req, res, next) => {
         const subject = req.query.subject
-        console.log('logout'+'?subject=' + subject)
+        console.log('delete','logout'+'?subject=' + subject)
         const result = await PersonService.logout(subject,req['user'].accessToken)
         console.log(result)
         res.send(result)
@@ -16,7 +17,7 @@ router.delete('/logout',
 
 router.get('/things',
       async (req, res, next) => {
-          console.log('api/things')
+          console.log('get','api/things')
           const result = await ThingService.list(req['user'].accessToken)
           res.send(result)
 });
@@ -24,7 +25,7 @@ router.get('/things',
 router.get('/things/:thingId',
        async (req, res, next) => {
           const thingId = req.params.thingId;
-          console.log('api/things/'+thingId)
+          console.log('get','api/things/'+thingId)
           const result = await ThingService.read(thingId,req['user'].accessToken)
           res.send(result)
 });
@@ -40,7 +41,7 @@ router.get('/user',
 router.get('/persons/:userId',
        async (req, res, next) => {
           const userId = req.params.userId;
-          console.log('api/user/'+userId)
+          console.log('get','api/user/'+userId)
           const result = await PersonService.readUserId(userId,req['user'].accessToken)
           res.send(result)
 });
@@ -51,8 +52,12 @@ router.get('/things/:thingId/properties/:propertyId',
         const propertyId = req.params.propertyId
         const from = req.query.from
         const to = req.query.to 
-        console.log('api/things/'+thingId+'/properties/'+propertyId+'?from=' + from + '&to=' + to);
-        const result = await PropertyService.read(thingId,propertyId,from,to,req['user'].accessToken)
+        if(from && to ){
+         console.log('get','api/things/'+thingId+'/properties/'+propertyId+'?from=' + from + '&to=' + to);
+        }else{
+         console.log('get','api/things/'+thingId+'/properties/'+propertyId);
+        }
+        const result = await PropertyService.read(thingId,propertyId,req['user'].accessToken,from,to)
         res.send(result)
 });
   
@@ -90,5 +95,26 @@ router.post('/things/:thingId/properties',
               const result = await PropertyService.create(thingId,body,req['user'].accessToken)
               res.send(result)
 });
+
+router.get('/stats',
+ async (req, res, next) => {
+  console.log('get','api/stats');
+  const result = await StatService.getGlobalStats(req['user'].accessToken)
+  res.send(result)
+}); 
+
+router.get('/stats/:PropertyType',
+ async (req, res, next) => {
+  const PropertyType = req.params.PropertyType
+  const from = req.query.from
+  const to = req.query.to 
+  if(from && to ){
+   console.log('get','api/stats/'+PropertyType+'?from=' + from + '&to=' + to);
+  }else{
+   console.log('get','api/stats/'+PropertyType);
+  }
+  const result = await StatService.getPropertyTypeStats(PropertyType,req['user'].accessToken,from,to)
+  res.send(result)
+}); 
 
 export const RouterAPI = router

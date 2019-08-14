@@ -9,6 +9,7 @@ export {GETRequest, POSTRequest, PUTRequest,DELETERequest,POSTRequestWithTimeOut
 export {ThingService} from './services/thing_service'
 export {PersonService} from './services/person_service'
 export {PropertyService} from './services/property_service'
+export {StatService} from './services/stat_service'
 
 export const Strategy = require('./passport-dcd/strategy');
 
