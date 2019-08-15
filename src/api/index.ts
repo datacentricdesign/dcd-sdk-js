@@ -103,17 +103,31 @@ router.get('/stats',
   res.send(result)
 }); 
 
-router.get('/stats/:PropertyType',
+router.get('/stats/propertTypes/:propertyType',
  async (req, res, next) => {
-  const PropertyType = req.params.PropertyType
+  const propertyType = req.params.propertyType
   const from = req.query.from
   const to = req.query.to 
   if(from && to ){
-   console.log('get','api/stats/'+PropertyType+'?from=' + from + '&to=' + to);
+   console.log('get','api/stats/propertyTypes/'+propertyType+'?from=' + from + '&to=' + to);
   }else{
-   console.log('get','api/stats/'+PropertyType);
+   console.log('get','api/stats/propertyTypes/'+propertyType);
   }
-  const result = await StatService.getPropertyTypeStats(PropertyType,req['user'].accessToken,from,to)
+  const result = await StatService.getPropertyTypeStats(propertyType,req['user'].accessToken,from,to)
+  res.send(result)
+}); 
+
+router.get('/stats/propertTypes',
+ async (req, res, next) => {
+  const propertyTypes = req.body.propertyTypes
+  const from = req.query.from
+  const to = req.query.to 
+  if(from && to ){
+   console.log('get','api/stats/propertyTypes?from=' + from + '&to=' + to);
+  }else{
+   console.log('get','api/stats/propertyType');
+  }
+  const result = await StatService.getPropertyTypesStats(propertyTypes,req['user'].accessToken,from,to)
   res.send(result)
 }); 
 

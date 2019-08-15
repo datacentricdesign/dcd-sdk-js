@@ -13,7 +13,7 @@ export const GETRequest = (url, authorization) => fetch(url, {
     Authorization: 'bearer ' + authorization,
     'Content-Type': 'application/json',
     'Accept': 'application/json'
-}
+    }
 }).then((res) => {
   if (res.ok) {
       try {
@@ -25,7 +25,6 @@ export const GETRequest = (url, authorization) => fetch(url, {
       return Promise.resolve(res.text());
   }
 })
-//.catch(err => console.log(err));
 .catch(err => { throw err });
 
 /**
@@ -63,7 +62,6 @@ export const POSTRequest = (url:string,authorization:string,body:{}) => {
           }
       })
       .catch(err => { throw err });
-      //.catch(err => console.log(err));
 };
 
 
@@ -102,7 +100,6 @@ export const PUTRequest = (url:string,authorization:string,body:{}) => {
           }
       })
       .catch(err => { throw err });
-      //.catch(err => console.log(err));
 };
 
 
@@ -136,7 +133,6 @@ export const DELETERequest = (url:string,authorization:string) => {
             }
         })
         .catch(err => { throw err });
-        //.catch(err => console.log(err));
   };
 
 /**
@@ -184,5 +180,33 @@ export const POSTRequestWithTimeOut = (url:string,authorization:string,body:{},t
             clearTimeout(timeout);
           })
         .catch(err => { throw err });
-        //.catch(err => console.log(err));
+  };
+
+export const GETRequestWithBody = (url:string,authorization:string,body:{}) => {
+    const params = {
+        headers: {
+            Authorization: 'bearer ' + authorization,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        method: 'GET'
+    };
+    if (body) {
+        const bodyStr = JSON.stringify(body);
+        params.headers['Content-length'] = bodyStr.length;
+        params['body'] = bodyStr;
+    }
+    return fetch(url, params)
+        .then((res) => {
+            if (res.ok) {
+                try {
+                    return Promise.resolve(res.json());
+                } catch (e) {
+                    return Promise.resolve(res.text());
+                }
+            } else {
+                return Promise.resolve(res.text());
+            }
+        })
+        .catch(err => { throw err });
   };

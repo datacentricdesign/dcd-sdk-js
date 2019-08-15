@@ -4,7 +4,7 @@ export { Property } from './entities/property'
 export { PropertyType } from './entities/property'
 export { Thing } from './entities/thing'
 
-export {GETRequest, POSTRequest, PUTRequest,DELETERequest,POSTRequestWithTimeOut} from './helpers/http'
+export {GETRequest, POSTRequest, PUTRequest,DELETERequest,POSTRequestWithTimeOut,GETRequestWithBody} from './helpers/http'
 
 export {ThingService} from './services/thing_service'
 export {PersonService} from './services/person_service'

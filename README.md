@@ -325,7 +325,16 @@ console.log(data)
 const property_type = "LOCATION"
 const from = (new Date('December 17, 2008 03:24:00')).getTime()
 const to = (new Date()).getTime()
-dcd.StatService.getPropertyTypeStats(PropertyType,token,from,to)
+dcd.StatService.getPropertyTypeStats(property_type,token,from,to)
+.then((data)=> {
+console.log(data)
+})
+
+//Get property types stats
+const property_types = ["LOCATION","THREE_DIMENSIONS"]
+const from = (new Date('December 17, 2008 03:24:00')).getTime()
+const to = (new Date()).getTime()
+dcd.StatService.getPropertyTypeStats(property_types,token,from,to)
 .then((data)=> {
 console.log(data)
 })
