@@ -103,7 +103,7 @@ router.get('/stats',
   res.send(result)
 });  
 
-router.get('/stats/propertTypes',
+router.get('/stats/propertyTypes',
  async (req, res, next) => {
   if (!req.query.types) {
    res.status(400).send({
