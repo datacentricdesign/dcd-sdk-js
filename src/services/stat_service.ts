@@ -21,30 +21,11 @@ export class StatService {
      * @param to (optionnal)
      * @returns {Promise<any>}
      */
-    static async getPropertyTypeStats(propertyType:string,token:string,from:number=undefined,to:number=undefined):Promise<any>{
-        if(from && to){
-        return http.GETRequest(api_url+'/stats/propertyTypes/'+propertyType+'?from=' + from + '&to=' + to,token)
-        }else{
-        return http.GETRequest(api_url+'/stats/propertyTypes/'+propertyType,token) 
-        }
-    }
-
-    /**
-     * Get property Type stats
-     * @param PropertyType 
-     * @param token 
-     * @param from (optionnal)
-     * @param to (optionnal)
-     * @returns {Promise<any>}
-     */
     static async getPropertyTypesStats(propertyTypes:string[],token:string,from:number=undefined,to:number=undefined):Promise<any>{
-        let body = {
-            propertyTypes : propertyTypes
-        }
         if(from && to){
-        return http.GETRequestWithBody(api_url+'/stats/propertyTypes?from=' + from + '&to=' + to,token,body)
+        return http.GETRequest(api_url+'/stats/propertyTypes?types='+propertyTypes.join()+ '&from=' + from + '&to=' + to,token)
         }else{
-            return http.GETRequestWithBody(api_url+'/stats/propertyTypes',token,body) 
+            return http.GETRequest(api_url+'/stats/propertyTypes?types='+propertyTypes.join(),token) 
         }
     }
 }

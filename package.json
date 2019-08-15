@@ -1,6 +1,6 @@
 {
   "name": "@datacentricdesign/sdk-js",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "description": "A Javascript SDK for the Data-Centric Design Hub",
   "main": "dist/index.js",
   "private": false,

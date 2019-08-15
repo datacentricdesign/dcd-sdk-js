@@ -101,34 +101,26 @@ router.get('/stats',
   console.log('get','api/stats');
   const result = await StatService.getGlobalStats(req['user'].accessToken)
   res.send(result)
-}); 
-
-router.get('/stats/propertTypes/:propertyType',
- async (req, res, next) => {
-  const propertyType = req.params.propertyType
-  const from = req.query.from
-  const to = req.query.to 
-  if(from && to ){
-   console.log('get','api/stats/propertyTypes/'+propertyType+'?from=' + from + '&to=' + to);
-  }else{
-   console.log('get','api/stats/propertyTypes/'+propertyType);
-  }
-  const result = await StatService.getPropertyTypeStats(propertyType,req['user'].accessToken,from,to)
-  res.send(result)
-}); 
+});  
 
 router.get('/stats/propertTypes',
  async (req, res, next) => {
-  const propertyTypes = req.body.propertyTypes
+  if (!req.query.types) {
+   res.status(400).send({
+     message: 'types is undefined'
+  });
+  }else{
+  let propertyTypes = req.query.types.split(',')
   const from = req.query.from
   const to = req.query.to 
   if(from && to ){
-   console.log('get','api/stats/propertyTypes?from=' + from + '&to=' + to);
+   console.log('get','api/stats/propertyTypes?from=' + from + '&to=' + to,propertyTypes);
   }else{
-   console.log('get','api/stats/propertyType');
+   console.log('get','api/stats/propertyType',propertyTypes);
   }
   const result = await StatService.getPropertyTypesStats(propertyTypes,req['user'].accessToken,from,to)
   res.send(result)
+}
 }); 
 
 export const RouterAPI = router
