@@ -33,7 +33,7 @@ router.get('/things/:thingId',
   
 router.get('/user',
        async (req, res, next) => {
-          console.log('api/user')
+          console.log('get','api/user')
           const result = await PersonService.readUser(req['user'].accessToken)
           res.send(result)
 });
