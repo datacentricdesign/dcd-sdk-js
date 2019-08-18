@@ -27,7 +27,7 @@
     "find-config": "^1.0.0",
     "install": "^0.12.2",
     "node-fetch": "^2.6.0",
-    "npm": "^6.9.0",
+    "npm": "^6.10.3",
     "passport-oauth2": "^1.5.0",
     "typescript": "^3.5.1"
   }
