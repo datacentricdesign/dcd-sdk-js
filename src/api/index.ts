@@ -5,6 +5,7 @@ import {PersonService} from '../services/person_service'
 import {ThingService} from '../services/thing_service'
 import {PropertyService} from '../services/property_service' 
 import {StatService} from '../services/stat_service'
+import {TaskService} from '../services/task_service'
 
 router.delete('/logout',
     async (req, res, next) => {
@@ -29,7 +30,6 @@ router.get('/things/:thingId',
           const result = await ThingService.read(thingId,req['user'].accessToken)
           res.send(result)
 });
-  
   
 router.get('/user',
        async (req, res, next) => {
@@ -121,6 +121,58 @@ router.get('/stats/propertyTypes',
   const result = await StatService.getPropertyTypesStats(propertyTypes,req['user'].accessToken,from,to)
   res.send(result)
 }
-}); 
+});
+
+router.get('/tasks',
+ async (req, res, next) => {
+   console.log('get','api/tasks')
+   const result = await TaskService.list(req['user'].accessToken)
+   res.send(result)
+});
+
+router.post('/tasks',
+ async (req, res, next) => {
+   const body = req.body
+   console.log('post','api/task',body)
+   const result = await TaskService.create(body,req['user'].accessToken)
+   res.send(result)
+});
+
+router.get('/tasks/:taskId',
+ async (req, res, next) => {
+   const taskId = req.params.taskId
+   console.log('get','api/tasks/'+taskId)
+   const result = await TaskService.read(taskId,req['user'].accessToken)
+   res.send(result)
+});
+
+router.delete('/tasks/:taskId',
+ async (req, res, next) => {
+   const taskId = req.params.taskId
+   console.log('delete','api/tasks/'+taskId)
+   const result = await TaskService.delete(taskId,req['user'].accessToken)
+   res.send(result)
+});
+
+router.get('/tasks/:taskId/resources',
+ async (req, res, next) => {
+   const taskId = req.params.taskId
+   const actor = req.query.actor
+   console.log('get','api/tasks/'+taskId+'/resources'+'?actor='+actor)
+   const result = await TaskService.readResources(taskId,actor,req['user'].accessToken)
+   res.send(result)
+});
+
+router.post('/tasks/:taskId/resources/:resourceId/milestones',
+ async (req, res, next) => {
+   const body = req.body
+   const taskId = req.params.taskId
+   const resourceId = req.params.resourceId
+   console.log('post','api/tasks/'+taskId+'/resources/'+resourceId+'milestones',body)
+   const result = await TaskService.addMilestone(taskId,resourceId,body,req['user'].accessToken)
+   res.send(result)
+});
+
+
 
 export const RouterAPI = router

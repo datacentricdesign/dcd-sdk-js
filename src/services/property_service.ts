@@ -9,17 +9,17 @@ export class PropertyService {
      * read also the value from a date to another (timestamp)
      * @param thing_id 
      * @param property_id 
-     * @param thing_token 
+     * @param token 
      * @param from (optionnal)
      * @param to (optionnal)
      * @returns {Promise<any>}
      */
-    static async read(thing_id:string,property_id:string,thing_token:string,from :number = undefined ,to :number = undefined):Promise<any>{
+    static async read(thing_id:string,property_id:string,token:string,from :number = undefined ,to :number = undefined):Promise<any>{
         if (from && to) {
             const readPropertyAPI = api_url+'/things/'+thing_id+'/properties/'+property_id+ '?from=' + from + '&to=' + to;
-            return http.GETRequest(readPropertyAPI,thing_token)
+            return http.GETRequest(readPropertyAPI,token)
         }else {
-            return http.GETRequest(api_url+'/things/'+thing_id+'/properties/'+property_id,thing_token)
+            return http.GETRequest(api_url+'/things/'+thing_id+'/properties/'+property_id,token)
         }   
     }
 
@@ -28,11 +28,11 @@ export class PropertyService {
      * function delete a property with his id.
      * @param thing_id 
      * @param property_id 
-     * @param thing_token 
+     * @param token 
      * @returns {Promise<any>}
      */
-    static async delete(thing_id:string,property_id:string,thing_token:string):Promise<any>{
-        return http.DELETERequest(api_url+'/things/'+thing_id+'/properties/'+property_id,thing_token)
+    static async delete(thing_id:string,property_id:string,token:string):Promise<any>{
+        return http.DELETERequest(api_url+'/things/'+thing_id+'/properties/'+property_id,token)
     }
 
 
@@ -40,11 +40,11 @@ export class PropertyService {
      * function create a property with a property in json.
      * @param thing_id 
      * @param property_json 
-     * @param thing_token 
+     * @param token 
      * @returns {Promise<any>}
      */
-    static async create(thing_id:string,property_json:{},thing_token:string):Promise<any>{
-        return http.POSTRequest(api_url+'/things/'+thing_id+'/properties',thing_token,property_json)
+    static async create(thing_id:string,property_json:{},token:string):Promise<any>{
+        return http.POSTRequest(api_url+'/things/'+thing_id+'/properties',token,property_json)
     
     }
 
@@ -54,11 +54,11 @@ export class PropertyService {
      * @param thing_id 
      * @param property_id 
      * @param values 
-     * @param thing_token 
+     * @param token 
      * @returns {Promise<any>}
      */
-    static async update(thing_id:string,property_id:string,property_json:{},thing_token:string):Promise<any>{
-        return http.PUTRequest(api_url+'/things/'+thing_id+'/properties/'+property_id,thing_token,property_json)
+    static async update(thing_id:string,property_id:string,property_json:{},token:string):Promise<any>{
+        return http.PUTRequest(api_url+'/things/'+thing_id+'/properties/'+property_id,token,property_json)
     }
 
 /**
@@ -66,11 +66,11 @@ export class PropertyService {
      * @param thing_id 
      * @param property_id 
      * @param values 
-     * @param thing_token 
+     * @param token 
      * @returns {Promise<any>}
      */
-    static async updatefile(thing_id:string,property_id:string,values:number[],thing_token:string):Promise<any>{
-        return http.POSTRequest(api_url+'/things/'+thing_id+'/properties/'+property_id+'/values/'+values.join()+'/file',thing_token,{})
+    static async updatefile(thing_id:string,property_id:string,values:number[],token:string):Promise<any>{
+        return http.POSTRequest(api_url+'/things/'+thing_id+'/properties/'+property_id+'/values/'+values.join()+'/file',token,{})
     }
 
 

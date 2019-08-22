@@ -10,6 +10,7 @@ export {ThingService} from './services/thing_service'
 export {PersonService} from './services/person_service'
 export {PropertyService} from './services/property_service'
 export {StatService} from './services/stat_service'
+export {TaskService} from './services/task_service'
 
 export const Strategy = require('./passport-dcd/strategy');
 
