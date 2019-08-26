@@ -133,7 +133,7 @@ router.get('/tasks',
 router.post('/tasks',
  async (req, res, next) => {
    const body = req.body
-   console.log('post','api/task',body)
+   console.log('post','api/tasks',body)
    const result = await TaskService.create(body,req['user'].accessToken)
    res.send(result)
 });
@@ -168,7 +168,7 @@ router.post('/tasks/:taskId/resources/:resourceId/milestones',
    const body = req.body
    const taskId = req.params.taskId
    const resourceId = req.params.resourceId
-   console.log('post','api/tasks/'+taskId+'/resources/'+resourceId+'milestones',body)
+   console.log('post','api/tasks/'+taskId+'/resources/'+resourceId+'/milestones',body)
    const result = await TaskService.addMilestone(taskId,resourceId,body,req['user'].accessToken)
    res.send(result)
 });

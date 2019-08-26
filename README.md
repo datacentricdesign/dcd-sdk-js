@@ -340,6 +340,66 @@ console.log(data)
 })
 ```
 
+### Task Service
+```js
+ const dcd = require('@datacentricdesign/sdk-js')
+ const token = 'your_token'
+
+//list all tasks
+dcd.TaskService.list(token)
+.then((data)=> {
+console.log(data)
+})
+
+//Read a tasks by id
+const task_id = 'your_task_id'
+dcd.TaskService.read(task_id,token)
+.then((data)=> {
+console.log(data)
+})
+
+//Delete task with his id
+const task_id = 'your_task_id'
+dcd.TaskService.delete(task_id,token)
+.then((data)=> {
+console.log(data)
+})
+
+//Create a task with a json.
+const task = {
+           name: "My Task",
+           description: "A description of my task.",
+           types: ["LOCATION","ACCELEROMETER"],
+           from : 1483228800000,
+           to : 1566286292578,
+           actor_entity_id : "your_person_id"
+         }
+dcd.ThingService.create(task,token)
+.then((data)=> {
+console.log(data)
+})
+
+//Read resources of a task with his id
+//You can set if you are an actor or a subject to this task with a boolean
+const task_id = 'your_task_id'
+const actor = true
+dcd.TaskService.readResources(task_id,actor,token)
+.then((data)=> {
+console.log(data)
+})
+
+//Add a milestone to a resources of a task with a task_id, resource_id and a milestone
+//The milestone need to have a shared_properties param with the properties concerned that you want share or not and the status ("unread","read","accepted" or "refused")
+const task_id = 'your_task_id'
+const resource_id = 'your_resource_id'
+const milestone = {
+  shared_properties : ['property_id_1','property_id_2'],
+  status : "accepted"
+}
+dcd.TaskService.addMilestone(task_id,resource_id,milestone,token)
+
+```
+
 ## Oauth2 passport Strategy
 
 To create an application that will connect to the hub from Oauth 2 we will use the strategy function :

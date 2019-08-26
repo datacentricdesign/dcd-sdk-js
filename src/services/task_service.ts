@@ -44,7 +44,7 @@ export class TaskService {
     }
 
     /**
-     * function read ressource of a task
+     * function read resources of a task
      * @param task_id 
      * @param token 
      */
@@ -57,7 +57,7 @@ export class TaskService {
     }
 
     /**
-     * function add milestone in a ressource of a task
+     * function add milestone to a resource of a task
      * @param task_id 
      * @param resource_id 
      * @param milestone 
