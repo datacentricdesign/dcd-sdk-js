@@ -1,5 +1,10 @@
 # Javascript SDK
 
+![GitHub package.json version](https://img.shields.io/github/package-json/v/datacentricdesign/dcd-sdk-js)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/datacentricdesign/dcd-sdk-js)
+![NPM](https://img.shields.io/npm/l/@datacentricdesign/sdk-js)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/@datacentricdesign/sdk-js)
+
 A Javascript SDK for the Data-Centric Design Hub
 
 ## Getting Started
