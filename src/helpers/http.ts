@@ -64,6 +64,39 @@ export const POSTRequest = (url:string,authorization:string,body:{}) => {
       .catch(err => { throw err });
 };
 
+/**
+ * A small helper function to make a POST request to the backend.
+ * It includes a bearer token in the request header.
+ * @param url
+ * @param authorization
+ * @param body
+ * @returns {Promise<>}
+ */
+export const POSTRequestEncoded = (url:string,authorization:string,body:string) => {
+    const params = {
+        headers: {
+            Authorization: 'bearer ' + authorization,
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json',
+            'Content-length': body.length
+        },
+        method: 'POST',
+        body: body
+    };
+    return fetch(url, params)
+        .then((res) => {
+            if (res.ok) {
+                try {
+                    return Promise.resolve(res.json());
+                } catch (e) {
+                    return Promise.resolve(res.text());
+                }
+            } else {
+                return Promise.resolve(res.text());
+            }
+        })
+        .catch(err => { throw err });
+};
 
 /**
  * A small helper function to make a POST request to the backend.
