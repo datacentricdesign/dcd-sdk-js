@@ -1,14 +1,15 @@
 import  * as http from '../helpers/http'
 
-const user_url = 'https://dwd.tudelft.nl:443/userinfo'
-const api_url = 'https://dwd.tudelft.nl:443/api'
-const auth_url = 'https://dwd.tudelft.nl:443/oauth2/auth'
+const user_url = process.env.OAUTH2_PROFILE
+const api_url = process.env.API_URL
+const auth_url = process.env.OAUTH2_AUTH_URL
+const revoke_url = process.env.OAUTH2_REVOKE_URL
 
 export class PersonService {
 
     /**
      * function read user credentials.
-     * @param token 
+     * @param token
      * @returns {Promise<any>}
      */
     static async readUser(token:string):Promise<any>{
@@ -17,7 +18,7 @@ export class PersonService {
     /**
      * function read user id (subject).
      * @param person_id 
-     * @param token 
+     * @param token
      * @returns {Promise<any>}
      */
     static async readUserId(person_id,token):Promise<any>{
@@ -30,7 +31,10 @@ export class PersonService {
      * @returns {Promise<any>} 
      */
     static async logout(person_sub,token):Promise<any>{
-        return http.DELETERequest(encodeURI(auth_url+'/sessions/login?subject='+person_sub),token)
+        return http.POSTRequest(encodeURI(revoke_url), token, {token})
+            .then( () => {
+                return http.DELETERequest(encodeURI(auth_url+'/sessions/login?subject='+person_sub), token)
+            })
     }
     /*
     static async revokeConsent(person_sub,token):Promise<any>{
