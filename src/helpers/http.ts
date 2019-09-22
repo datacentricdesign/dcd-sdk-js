@@ -75,7 +75,6 @@ export const POSTRequest = (url:string,authorization:string,body:{}) => {
 export const POSTRequestEncoded = (url:string,authorization:string,body:string) => {
     const params = {
         headers: {
-            Authorization: 'bearer ' + authorization,
             'Content-Type': 'application/x-www-form-urlencoded',
             Accept: 'application/json',
             'Content-length': body.length
