@@ -31,7 +31,7 @@ export class PersonService {
      * @returns {Promise<any>} 
      */
     static async logout(person_sub,token):Promise<any>{
-        return http.POSTRequestEncoded(encodeURI(revoke_url), token, "token: " + token)
+        return http.POSTRequestEncoded(encodeURI(revoke_url), token, JSON.stringify({token: token}))
             .then( () => {
                 return http.DELETERequest(encodeURI(auth_url+'/sessions/login?subject='+person_sub), token)
             })
