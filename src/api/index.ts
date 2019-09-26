@@ -11,9 +11,7 @@ router.delete('/logout',
     async (req, res, next) => {
         const subject = req.query.subject
         console.log('delete','logout'+'?subject=' + subject)
-        const result = await PersonService.logout(subject,req['user'].accessToken)
-        console.log(result)
-        res.send(result)
+        return PersonService.logout(subject,req['user'].accessToken)
 });
 
 router.get('/things',

@@ -4,6 +4,8 @@ const user_url = process.env.OAUTH2_PROFILE
 const api_url = process.env.API_URL
 const auth_url = process.env.OAUTH2_AUTH_URL
 const revoke_url = process.env.OAUTH2_REVOKE_URL
+const client_id = process.env.OAUTH2_CLIENT_ID
+const client_secret = process.env.OAUTH2_CLIENT_SECRET
 
 export class PersonService {
 
@@ -17,7 +19,7 @@ export class PersonService {
     }
     /**
      * function read user id (subject).
-     * @param person_id 
+     * @param person_id
      * @param token
      * @returns {Promise<any>}
      */
@@ -26,19 +28,14 @@ export class PersonService {
     }
     /**
      * Revoke login
-     * @param person_sub 
+     * @param person_sub
      * @param token
-     * @returns {Promise<any>} 
+     * @returns {Promise<any>}
      */
     static async logout(person_sub,token):Promise<any>{
-        return http.POSTRequestEncoded(encodeURI(revoke_url), token, JSON.stringify({token: token}))
-            .then( () => {
-                return http.DELETERequest(encodeURI(auth_url+'/sessions/login?subject='+person_sub), token)
-            })
+        console.log('log out API');
+        const logOutURI = encodeURI(revoke_url);
+        console.log(logOutURI);
+        return http.POSTRequestEncoded(logOutURI, token, "token="+token+"&client_id="+client_id+"&client_secret="+client_secret)
     }
-    /*
-    static async revokeConsent(person_sub,token):Promise<any>{
-        return http.DELETERequest(auth_url+'/sessions/consent?subject='+person_sub,token)
-    }*/
-
 }
