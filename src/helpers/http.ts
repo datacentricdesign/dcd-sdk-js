@@ -9,23 +9,25 @@ import AbortController from 'abort-controller';
  * @returns {Promise<>}
  */
 export const GETRequest = (url, authorization) => fetch(url, {
-  headers: {
-    Authorization: 'bearer ' + authorization,
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
+    headers: {
+        Authorization: 'bearer ' + authorization,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
     }
 }).then((res) => {
-  if (res.ok) {
-      try {
-          return Promise.resolve(res.json());
-      } catch (e) {
-          return Promise.resolve(res.text());
-      }
-  } else {
-      return Promise.resolve(res.text());
-  }
+    if (res.ok) {
+        try {
+            return Promise.resolve(res.json());
+        } catch (e) {
+            return Promise.resolve(res.text());
+        }
+    } else {
+        return Promise.resolve(res.text());
+    }
 })
-.catch(err => { throw err });
+    .catch(err => {
+        throw err
+    });
 
 /**
  * A small helper function to make a POST request to the backend.
@@ -35,33 +37,35 @@ export const GETRequest = (url, authorization) => fetch(url, {
  * @param body
  * @returns {Promise<>}
  */
-export const POSTRequest = (url:string,authorization:string,body:{}) => {
-  const params = {
-      headers: {
-          Authorization: 'bearer ' + authorization,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-      },
-      method: 'POST'
-  };
-  if (body) {
-      const bodyStr = JSON.stringify(body);
-      params.headers['Content-length'] = bodyStr.length;
-      params['body'] = bodyStr;
-  }
-  return fetch(url, params)
-      .then((res) => {
-          if (res.ok) {
-              try {
-                  return Promise.resolve(res.json());
-              } catch (e) {
-                  return Promise.resolve(res.text());
-              }
-          } else {
-              return Promise.resolve(res.text());
-          }
-      })
-      .catch(err => { throw err });
+export const POSTRequest = (url: string, authorization: string, body: {}) => {
+    const params = {
+        headers: {
+            Authorization: 'bearer ' + authorization,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        method: 'POST'
+    };
+    if (body) {
+        const bodyStr = JSON.stringify(body);
+        params.headers['Content-length'] = bodyStr.length;
+        params['body'] = bodyStr;
+    }
+    return fetch(url, params)
+        .then((res) => {
+            if (res.ok) {
+                try {
+                    return Promise.resolve(res.json());
+                } catch (e) {
+                    return Promise.resolve(res.text());
+                }
+            } else {
+                return Promise.resolve(res.text());
+            }
+        })
+        .catch(err => {
+            throw err
+        });
 };
 
 /**
@@ -72,10 +76,11 @@ export const POSTRequest = (url:string,authorization:string,body:{}) => {
  * @param body
  * @returns {Promise<>}
  */
-export const POSTRequestEncoded = (url:string,authorization:string,body:string) => {
+export const POSTRequestEncoded = (url: string, authorization: string, body: string) => {
     const params = {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
+            Accept: 'application/json',
             'Content-length': body.length
         },
         method: 'POST',
@@ -93,7 +98,9 @@ export const POSTRequestEncoded = (url:string,authorization:string,body:string) 
                 return Promise.resolve(res.text());
             }
         })
-        .catch(err => { throw err });
+        .catch(err => {
+            return Promise.resolve(err);
+        });
 };
 
 /**
@@ -104,33 +111,35 @@ export const POSTRequestEncoded = (url:string,authorization:string,body:string) 
  * @param body
  * @returns {Promise<>}
  */
-export const PUTRequest = (url:string,authorization:string,body:{}) => {
-  const params = {
-      headers: {
-          Authorization: 'bearer ' + authorization,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-      },
-      method: 'PUT'
-  };
-  if (body) {
-      const bodyStr = JSON.stringify(body);
-      params.headers['Content-length'] = bodyStr.length;
-      params['body'] = bodyStr;
-  }
-  return fetch(url, params)
-      .then((res) => {
-          if (res.ok) {
-              try {
-                  return Promise.resolve(res.json());
-              } catch (e) {
-                  return Promise.resolve(res.text());
-              }
-          } else {
-              return Promise.resolve(res.text());
-          }
-      })
-      .catch(err => { throw err });
+export const PUTRequest = (url: string, authorization: string, body: {}) => {
+    const params = {
+        headers: {
+            Authorization: 'bearer ' + authorization,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        method: 'PUT'
+    };
+    if (body) {
+        const bodyStr = JSON.stringify(body);
+        params.headers['Content-length'] = bodyStr.length;
+        params['body'] = bodyStr;
+    }
+    return fetch(url, params)
+        .then((res) => {
+            if (res.ok) {
+                try {
+                    return Promise.resolve(res.json());
+                } catch (e) {
+                    return Promise.resolve(res.text());
+                }
+            } else {
+                return Promise.resolve(res.text());
+            }
+        })
+        .catch(err => {
+            throw err
+        });
 };
 
 
@@ -142,7 +151,7 @@ export const PUTRequest = (url:string,authorization:string,body:{}) => {
  * @param body
  * @returns {Promise<>}
  */
-export const DELETERequest = (url:string,authorization:string) => {
+export const DELETERequest = (url: string, authorization: string) => {
     const params = {
         headers: {
             Authorization: 'bearer ' + authorization,
@@ -163,8 +172,10 @@ export const DELETERequest = (url:string,authorization:string) => {
                 return Promise.resolve(res.text());
             }
         })
-        .catch(err => { throw err });
-  };
+        .catch(err => {
+            throw err
+        });
+};
 
 /**
  * A small helper function to make a POST request to the backend.
@@ -174,12 +185,14 @@ export const DELETERequest = (url:string,authorization:string) => {
  * @param body
  * @returns {Promise<>}
  */
-export const POSTRequestWithTimeOut = (url:string,authorization:string,body:{},time:number) => {
+export const POSTRequestWithTimeOut = (url: string, authorization: string, body: {}, time: number) => {
     const controller = new AbortController();
     const timeout = setTimeout(
-        () => { controller.abort(); },
+        () => {
+            controller.abort();
+        },
         time,
-        );
+    );
 
     const params = {
         headers: {
@@ -188,7 +201,7 @@ export const POSTRequestWithTimeOut = (url:string,authorization:string,body:{},t
             'Accept': 'application/json'
         },
         method: 'POST',
-        signal : controller.signal
+        signal: controller.signal
     };
     if (body) {
         const bodyStr = JSON.stringify(body);
@@ -209,11 +222,13 @@ export const POSTRequestWithTimeOut = (url:string,authorization:string,body:{},t
         })
         .finally(() => {
             clearTimeout(timeout);
-          })
-        .catch(err => { throw err });
-  };
+        })
+        .catch(err => {
+            throw err
+        });
+};
 
-export const GETRequestWithBody = (url:string,authorization:string,body:{}) => {
+export const GETRequestWithBody = (url: string, authorization: string, body: {}) => {
     const params = {
         headers: {
             Authorization: 'bearer ' + authorization,
@@ -239,5 +254,7 @@ export const GETRequestWithBody = (url:string,authorization:string,body:{}) => {
                 return Promise.resolve(res.text());
             }
         })
-        .catch(err => { throw err });
-  };
+        .catch(err => {
+            throw err
+        });
+};

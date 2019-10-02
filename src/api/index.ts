@@ -7,13 +7,6 @@ import {PropertyService} from '../services/property_service'
 import {StatService} from '../services/stat_service'
 import {TaskService} from '../services/task_service'
 
-router.delete('/logout',
-    async (req, res, next) => {
-        const subject = req.query.subject
-        console.log('delete','logout'+'?subject=' + subject)
-        return PersonService.logout(subject,req['user'].accessToken)
-});
-
 router.get('/things',
       async (req, res, next) => {
           console.log('get','api/things')
