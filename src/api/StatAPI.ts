@@ -8,7 +8,7 @@ export class StatAPI extends API {
 
         this.router.get('/stats',
             async (req, res, next) => {
-                const result = await StatService.getGlobalStats(req['user'].accessToken);
+                const result = await this.model.getStats().getGlobalStats(req['user'].accessToken);
                 res.send(result)
             });
 
@@ -27,7 +27,7 @@ export class StatAPI extends API {
                     } else {
                         console.log('get', 'api/stats/propertyType', propertyTypes);
                     }
-                    const result = await StatService.getPropertyTypesStats(propertyTypes, req['user'].accessToken, from, to);
+                    const result = await this.model.getStats().getPropertyTypesStats(propertyTypes, req['user'].accessToken, from, to);
                     res.send(result)
                 }
             });

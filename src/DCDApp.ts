@@ -13,24 +13,25 @@ import {StatAPI} from "./api/StatAPI";
 import {TaskAPI} from "./api/TaskAPI";
 import {DCDModel} from "./index";
 
-const defaultOptions = {
-    baseUrl: process.env.BASE_URL || '',
-    strategy: {
-        authorizationURL: process.env.OAUTH2_AUTH_URL,
-        tokenURL: process.env.OAUTH2_TOKEN_URL,
-        clientID: process.env.OAUTH2_CLIENT_ID,
-        clientSecret: process.env.OAUTH2_CLIENT_SECRET,
-        callbackURL: process.env.OAUTH2_REDIRECT_URL,
-        userProfileURL: process.env.OAUTH2_PROFILE,
-        state: true,
-        scope: ['offline', 'openid', 'profile', 'dcd:things', 'dcd:persons']
+class DCDOptions {
+    baseUrl: string = process.env.BASE_URL || '';
+    strategy: StrategyOptions
+}
 
-    }
-};
+class StrategyOptions {
+    authorizationURL: string = process.env.OAUTH2_AUTH_URL;
+    tokenURL: string = process.env.OAUTH2_TOKEN_URL;
+    clientID: string = process.env.OAUTH2_CLIENT_ID;
+    clientSecret: string = process.env.OAUTH2_CLIENT_SECRET;
+    callbackURL: string = process.env.OAUTH2_REDIRECT_URL;
+    userProfileURL: string = process.env.OAUTH2_PROFILE;
+    state: boolean = true;
+    scope: Array<string> = ['offline', 'openid', 'profile', 'dcd:things', 'dcd:persons'];
+}
 
 export class DCDApp {
     private readonly model: DCDModel;
-    private readonly options: object;
+    private readonly options: DCDOptions;
     private readonly baseUrl: string;
 
     public readonly app : express;
@@ -40,7 +41,7 @@ export class DCDApp {
     private statAPI: StatAPI;
     private taskAPI: TaskAPI;
 
-    constructor(model, options = defaultOptions) {
+    constructor(model: DCDModel, options: DCDOptions) {
         this.model = model;
         this.options = options;
 

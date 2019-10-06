@@ -1,7 +1,7 @@
 import { Property } from './property'
-import { PropertyType } from './property'
-import { ThingService } from '../services/thing_service'
-import { PropertyService } from '../services/property_service'
+// import { PropertyType } from './property'
+// import { ThingService } from '../services/ThingService'
+// import { PropertyService } from '../services/PropertyService'
 
 export class Thing {
      thing_id: string;
@@ -45,18 +45,18 @@ export class Thing {
     }
     }
 
-    async read(): Promise<void>{
-        const result = await ThingService.read(this.thing_id,this.thing_token)
-        if(!result.thing){
-            throw new TypeError('body is undifined or null : no thing found, check if the id and token of your thing are valid')
-        }else{
-            this.thing_name = result.thing['name']
-            this.thing_description = result.thing['description']
-            this.thing_type =  result.thing['type']
-            this.update_properties(this.array_to_properties(result.thing.properties))
-            return
-        }
-    }
+    // async read(): Promise<void>{
+    //     const result = await ThingService.read(this.thing_id,this.thing_token)
+    //     if(!result.thing){
+    //         throw new TypeError('body is undifined or null : no thing found, check if the id and token of your thing are valid')
+    //     }else{
+    //         this.thing_name = result.thing['name']
+    //         this.thing_description = result.thing['description']
+    //         this.thing_type =  result.thing['type']
+    //         this.update_properties(this.array_to_properties(result.thing.properties))
+    //         return
+    //     }
+    // }
 
     json():{}{
         return {
@@ -68,33 +68,33 @@ export class Thing {
         }
     }
 
-    async find_or_create_property(property_name:string,property_type:PropertyType):Promise<Property>{
-        if(this.find_property_by_name(property_name) == undefined){
-            const res = await this.create_property(property_name,property_type)
-            return res;
-        }else{
-            return this.find_property_by_name(property_name)
-        }
-    }
+    // async find_or_create_property(property_name:string,property_type:PropertyType):Promise<Property>{
+    //     if(this.find_property_by_name(property_name) == undefined){
+    //         const res = await this.create_property(property_name,property_type)
+    //         return res;
+    //     }else{
+    //         return this.find_property_by_name(property_name)
+    //     }
+    // }
 
-    private async create_property(property_name:string,property_type:PropertyType):Promise<Property>{
-        var prop = new Property({
-            name : property_name,
-            type : property_type,
-        })
-        const result = await PropertyService.create(this.thing_id,prop.json(),this.thing_token)
-        const prop_res : Property = new Property({
-            entity : this,
-            id :   result.property.id,
-            name : result.property.name,
-            description : result.property.description,
-            type : result.property.type,
-            dimensions : result.property.dimensions,
-            values : result.property.values
-        })
-        this.thing_properties.push(prop_res)
-        return prop_res
-    }
+    // private async create_property(property_name:string,property_type:PropertyType):Promise<Property>{
+    //     var prop = new Property({
+    //         name : property_name,
+    //         type : property_type,
+    //     })
+    //     const result = await PropertyService.create(this.thing_id,prop.json(),this.thing_token)
+    //     const prop_res : Property = new Property({
+    //         entity : this,
+    //         id :   result.property.id,
+    //         name : result.property.name,
+    //         description : result.property.description,
+    //         type : result.property.type,
+    //         dimensions : result.property.dimensions,
+    //         values : result.property.values
+    //     })
+    //     this.thing_properties.push(prop_res)
+    //     return prop_res
+    // }
 
     private properties_to_array():Array<any>{
         var res = []
@@ -130,17 +130,17 @@ export class Thing {
         }
     }
 
-    update_property(property:Property){
-        this.update_property_http(property)
-        if(!this.contains(property.property_id)){
-            this.thing_properties.push(property)
-        }
-    }
+    // update_property(property:Property){
+    //     this.update_property_http(property)
+    //     if(!this.contains(property.property_id)){
+    //         this.thing_properties.push(property)
+    //     }
+    // }
 
-    private async update_property_http(property:Property){
-        const result = await PropertyService.update(this.thing_id,property.property_id,property.json(),this.thing_token)
-        console.log('update property',result)
-    }
+    // private async update_property_http(property:Property){
+    //     const result = await PropertyService.update(this.thing_id,property.property_id,property.json(),this.thing_token)
+    //     console.log('update property',result)
+    // }
 
     private update_properties(properties:Array<Property>){
         properties.forEach(property => {
