@@ -68,4 +68,4 @@ Strategy.prototype.userProfile = function (accessToken, done) {
 /**
  * Expose `Strategy`.
  */
-module.exports = Strategy;
+exports.Strategy = Strategy;
