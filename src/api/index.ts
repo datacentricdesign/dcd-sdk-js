@@ -71,7 +71,7 @@ router.delete('/things/:thingId/properties/:propertyId',
   
 router.post('/things',
         async (req, res, next) => {
-            const jwt = req.query.jwt
+            const jwt = req.query.jwt !== undefined ? req.query.jwt : false;
             const body = req.body
             console.log('post','api/things/'+'?jwt=' + jwt,body)
             const result = await ThingService.create(body,jwt,req['user'].accessToken)

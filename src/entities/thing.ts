@@ -9,6 +9,7 @@ export class Thing {
      thing_name: string;
      thing_description: string;
      thing_type: string
+     thing_pem: string
      thing_properties: Property[] = [];
     
     constructor(params : {}) {
@@ -20,7 +21,8 @@ export class Thing {
         this.thing_name = params['name']
         this.thing_description = params['description']
         this.thing_type = params['type']
-        
+        this.thing_pem = params['pem']
+
         if(params['properties'] instanceof Array){
             params['properties'].forEach(property => {
                 if(property instanceof Property){
@@ -60,12 +62,13 @@ export class Thing {
 
     json():{}{
         return {
-        id : this.thing_id,
-        name : this.thing_name,
-        type : this.thing_type,
-        description: this.thing_description,
-        properties : this.properties_to_array()
-        }
+            id : this.thing_id,
+            name : this.thing_name,
+            type : this.thing_type,
+            description: this.thing_description,
+            properties : this.properties_to_array(),
+            pem: this.thing_pem
+        };
     }
 
     async find_or_create_property(property_name:string,property_type:PropertyType):Promise<Property>{
@@ -82,7 +85,7 @@ export class Thing {
             name : property_name,
             type : property_type,
         })
-        const result = await PropertyService.create(this.thing_id,prop.json(),this.thing_token)
+        const result = await PropertyService.create(this.thing_id, prop.json(), this.thing_token)
         const prop_res : Property = new Property({
             entity : this,
             id :   result.property.id,
