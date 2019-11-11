@@ -1,6 +1,6 @@
 {
   "name": "@datacentricdesign/sdk-js",
-  "version": "0.0.31-feature.designer-task",
+  "version": "0.0.32-feature.designer-task",
   "description": "A Javascript SDK for the Data-Centric Design Hub",
   "main": "dist/index.js",
   "private": false,
