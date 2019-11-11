@@ -1,24 +1,24 @@
 import { Thing } from './thing'
 
 export class Property {
-    proprety_entity: Thing
+    proprety_entity: Thing;
     property_id: string;
     property_name: string;
     property_description: string;
     property_type: string;
     property_dimensions: any[] = [];
     property_values: any[] = [];
-    property_entitiy_id:string;
+    property_entitiy_id: string;
 
 
-    constructor(params : {}) {
-        if(!params){
+    constructor(params: {}) {
+        if (!params) {
             throw new TypeError('Property : constructor param is undefined or null')
-        }else{
-            this.proprety_entity = params['entity']
-            this.property_id = params['id']
-            this.property_name = params['name']
-            this.property_description = params['description']
+        } else {
+            this.proprety_entity = params['entity'];
+            this.property_id = params['id'];
+            this.property_name = params['name'];
+            this.property_description = params['description'];
             this.property_type = params['type'];
             this.property_dimensions = params['dimensions'];
             this.property_values = params['values'];
@@ -26,29 +26,29 @@ export class Property {
         }
     }
 
-    json(){
+    json() {
         return {
-            id : this.property_id,
-            name : this.property_name,
-            type : this.property_type,
+            id: this.property_id,
+            name: this.property_name,
+            type: this.property_type,
             description: this.property_description,
             dimensions: this.property_dimensions,
-            values : this.property_values,
-            entityId : this.property_entitiy_id
+            values: this.property_values,
+            entityId: this.property_entitiy_id
         }
     }
 
-    update_values(values:any[]){
-        this.property_values = []
-        const ts = (new Date()).getTime()
-        values.unshift(ts)
-        this.property_values.push(values)
+    update_values(values: any[]) {
+        this.property_values = [];
+        const ts = (new Date()).getTime();
+        values.unshift(ts);
+        this.property_values.push(values);
         this.proprety_entity.update_property(this)
     }
 
 }
 
-export enum PropertyType{
+export enum PropertyType {
     ONE_DIMENSION = "ONE_DIMENSION",
     TWO_DIMENSIONS = "TWO_DIMENSIONS",
     THREE_DIMENSIONS = "THREE_DIMENSIONS",

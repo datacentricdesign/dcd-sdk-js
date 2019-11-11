@@ -531,6 +531,12 @@ const dcd = require('@datacentricdesign/sdk-js')
 app.use(baseUrl+'/api', checkAuthentication, dcd.RouterAPI);
 ```
 
+# Development
+
+Compile with `npm run prepare` 
+
+Run test server with `node test.js`
+
 # Changelog
 
 All notable changes to this project will be documented in this file.

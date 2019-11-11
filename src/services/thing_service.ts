@@ -42,11 +42,8 @@ export class ThingService {
      * @returns {Promise<any>}
      */
     static async create(thing_json: {}, jwt: boolean, token: string): Promise<any> {
-        if (jwt) {
-            return http.POSTRequestWithTimeOut(api_url + '/things/?jwt=' + jwt, token, thing_json, 60000)
-        } else {
-            return http.POSTRequestWithTimeOut(api_url + '/things/', token, thing_json, 60000)
-        }
+        thing_json["pem"] = undefined;
+        return http.POSTRequestWithTimeOut(api_url + '/things/?jwt=true', token, thing_json, 60000)
     }
 
 

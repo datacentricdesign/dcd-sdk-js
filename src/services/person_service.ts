@@ -1,11 +1,11 @@
 import * as http from '../helpers/http'
 
-const user_url = process.env.OAUTH2_PROFILE
-const api_url = process.env.API_URL
-const auth_url = process.env.OAUTH2_AUTH_URL
-const revoke_url = process.env.OAUTH2_REVOKE_URL
-const client_id = process.env.OAUTH2_CLIENT_ID
-const client_secret = process.env.OAUTH2_CLIENT_SECRET
+const user_url = process.env.OAUTH2_PROFILE;
+const api_url = process.env.API_URL;
+const auth_url = process.env.OAUTH2_AUTH_URL;
+const revoke_url = process.env.OAUTH2_REVOKE_URL;
+const client_id = process.env.OAUTH2_CLIENT_ID;
+const client_secret = process.env.OAUTH2_CLIENT_SECRET;
 
 export class PersonService {
 

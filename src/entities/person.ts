@@ -8,9 +8,9 @@ export class Person {
         if(!params){
             throw new TypeError('Person : constructor param is undefined or null')
         }else{
-        this.person_id = params['id']
-        this.person_name = params['name']
-        this.person_password = params['password']
+        this.person_id = params['id'];
+        this.person_name = params['name'];
+        this.person_password = params['password'];
         this.person_properties = params['properties']
         }
     }

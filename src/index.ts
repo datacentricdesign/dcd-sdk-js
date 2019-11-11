@@ -15,3 +15,5 @@ export {TaskService} from './services/task_service'
 export const Strategy = require('./passport-dcd/strategy');
 
 export {RouterAPI} from './api/index'
+
+export {app, checkAuthentication} from './server'
