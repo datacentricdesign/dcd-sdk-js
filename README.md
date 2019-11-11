@@ -537,6 +537,8 @@ Compile with `npm run prepare`
 
 Run test server with `node test.js`
 
+To publish, change version number in package.json, then `npm publish`
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
